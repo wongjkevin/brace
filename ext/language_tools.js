@@ -1453,6 +1453,7 @@ ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/e
                     var position = this.editor.selection.getCursor();
                     var wordRange = this.editor.selection.getWordRange(position.row, position.column);
                     console.log(wordRange);
+                    wordRange.start.column = wordRange.start.column + 1;
                     this.editor.session.remove(wordRange);
                     this.editor.execCommand("insertstring", data.value || data);
                 }
@@ -1902,12 +1903,7 @@ ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/e
     
     var doLiveAutocomplete = function(e) {
         var editor = e.editor;
-        //var hasCompleter = editor.completer && editor.completer.activated;
-    
         if (e.command.name != "Up" && e.command.name != "Down") {
-            console.log(e.command.name)
-            console.log("editor.completer")
-            console.log(editor.completer)
             if (!editor.completer) {
                 editor.completer = new Autocomplete();
                 editor.completer.autoInsert = false;
