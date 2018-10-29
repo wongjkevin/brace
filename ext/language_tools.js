@@ -1905,7 +1905,7 @@ ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/e
         var hasCompleter = editor.completer && editor.completer.activated;
     
         if (e.command.name === "insertstring" || e.command.name === "backspace") {
-            if (!hasCompleter) {
+            if (!editor.completer) {
                 editor.completer = new Autocomplete();
                 editor.completer.autoInsert = false;
             }
