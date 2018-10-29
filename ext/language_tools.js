@@ -1453,6 +1453,7 @@ ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/e
                     var position = this.editor.selection.getCursor();
                     var wordRange = this.editor.selection.getWordRange(position.row, position.column);
                     console.log(wordRange);
+                    console.log("\"" + this.editor.session.getTokenAt(wordRange.start.row, wordRange.start.column).value + "\"");
                     wordRange.start.column = wordRange.start.column + 1;
                     this.editor.session.remove(wordRange);
                     this.editor.execCommand("insertstring", data.value || data);
