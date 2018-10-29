@@ -1903,13 +1903,20 @@ ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/e
     var doLiveAutocomplete = function(e) {
         var editor = e.editor;
         var hasCompleter = editor.completer && editor.completer.activated;
-    
-        if (e.command.name === "insertstring" || e.command.name === "backspace") {
-            if (!editor.completer) {
-                editor.completer = new Autocomplete();
+        if (e.command.name === "backspace") {
+            if (hasCompleter && !util.getCompletionPrefix(editor))
+                editor.completer.detach();
+        }
+        else if (e.command.name === "insertstring") {
+            console.log("insert string")
+            var prefix = util.getCompletionPrefix(editor);
+            if (prefix && !hasCompleter) {
+                if (!editor.completer) {
+                    editor.completer = new Autocomplete();
+                }
                 editor.completer.autoInsert = false;
+                editor.completer.showPopup(editor);
             }
-            editor.completer.showPopup(editor);
         }
     };
     
