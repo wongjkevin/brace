@@ -1904,13 +1904,13 @@ ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/e
         var editor = e.editor;
         var hasCompleter = editor.completer && editor.completer.activated;
     
-        //if (e.command.name === "insertstring" || e.command.name === "backspace") {
+        if (e.command.name === "insertstring" || e.command.name === "backspace") {
             if (!hasCompleter) {
                 editor.completer = new Autocomplete();
                 editor.completer.autoInsert = false;
             }
             editor.completer.showPopup(editor);
-       // }
+        }
     };
     
     var Editor = acequire("../editor").Editor;
