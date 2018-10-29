@@ -1453,9 +1453,9 @@ ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/e
                     var position = this.editor.selection.getCursor();
                     var wordRange = this.editor.selection.getWordRange(position.row, position.column);
                     console.log(wordRange);
-                    var curToken = this.editor.session.getTokenAt(position.row, position.column);
+                    var curTokenValue = this.editor.session.getTokenAt(position.row, position.column).value;
                     console.log(curToken);
-                    if (curToken == " " || curToken == "." || curToken < 'A') {
+                    if (curTokenValue == " " || curTokenValue == "." || curTokenValue < 'A') {
                         wordRange.start.column = wordRange.start.column + 1;
                     }
                     this.editor.session.remove(wordRange);
