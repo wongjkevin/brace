@@ -1904,7 +1904,7 @@ ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/e
         var editor = e.editor;
         //var hasCompleter = editor.completer && editor.completer.activated;
     
-        if (e.command.name != "golineup" && e.command.name != "golinedown") {
+        if (e.command.name != "Up" && e.command.name != "Down") {
             console.log(e.command.name)
             console.log("editor.completer")
             console.log(editor.completer)
