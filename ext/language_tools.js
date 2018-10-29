@@ -1454,7 +1454,7 @@ ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/e
                     var wordRange = this.editor.selection.getWordRange(position.row, position.column);
                     console.log(wordRange);
                     var curTokenValue = this.editor.session.getTokenAt(position.row, position.column).value;
-                    console.log(curToken);
+                    console.log(curTokenValue);
                     if (curTokenValue == " " || curTokenValue == "." || curTokenValue < 'A') {
                         wordRange.start.column = wordRange.start.column + 1;
                     }
