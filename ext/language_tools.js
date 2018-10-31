@@ -1366,7 +1366,7 @@ ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/e
             this.editor.keyBinding.removeKeyboardHandler(this.keyboardHandler);
             this.editor.off("changeSelection", this.changeListener);
             this.editor.off("blur", this.blurListener);
-            //this.editor.off("mousedown", this.mousedownListener);
+            this.editor.off("mousedown", this.mousedownListener);
             this.editor.off("mousewheel", this.mousewheelListener);
             this.changeTimer.cancel();
             this.hideDocTooltip();
@@ -1403,11 +1403,11 @@ ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/e
                 this.detach();
             }
         };
-    
+        /*
         this.mousedownListener = function(e) {
             this.detach();
         };
-    
+        */
         this.mousewheelListener = function(e) {
             this.detach();
         };
