@@ -1935,6 +1935,7 @@ ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/e
                     if (!this.completers)
                         this.completers = Array.isArray(val)? val: completers;
                     this.commands.on('afterExec', doLiveAutocomplete);
+                    this.on('mousedown', doLiveAutocomplete);
                 } else {
                     this.commands.removeListener('afterExec', doLiveAutocomplete);
                 }
