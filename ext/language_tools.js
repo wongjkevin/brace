@@ -1907,12 +1907,11 @@ ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/e
         var editor = e.editor;
         console.log(e)
         console.log(editor)
-        if (e.command.name != "Up" && e.command.name != "Down") {
+        if (!e.command || (e.command.name != "Up" && e.command.name != "Down")) {
             if (!editor.completer) {
                 editor.completer = new Autocomplete();
                 editor.completer.autoInsert = false;
             }
-            console.log("Showing Popup Completer")
             editor.completer.showPopup(editor);
         }
     };
