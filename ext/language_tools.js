@@ -1905,6 +1905,8 @@ ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/e
     
     var doLiveAutocomplete = function(e) {
         var editor = e.editor;
+        console.log(e)
+        console.log(editor)
         if (e.command.name != "Up" && e.command.name != "Down") {
             if (!editor.completer) {
                 editor.completer = new Autocomplete();
