@@ -1910,6 +1910,7 @@ ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/e
                 editor.completer = new Autocomplete();
                 editor.completer.autoInsert = false;
             }
+            console.log("Showing Popup Completer")
             editor.completer.showPopup(editor);
         }
     };
