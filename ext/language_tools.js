@@ -1525,7 +1525,7 @@ ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/e
     
             editor.on("changeSelection", this.changeListener);
             editor.on("blur", this.blurListener);
-            editor.on("mousedown", this.mousedownListener);
+            //editor.on("mousedown", this.mousedownListener);
             editor.on("mousewheel", this.mousewheelListener);
     
             this.updateCompletions();
@@ -1905,8 +1905,6 @@ ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/e
     
     var doLiveAutocomplete = function(e) {
         var editor = e.editor;
-        console.log(e)
-        console.log(editor)
         if (!e.command || (e.command.name != "Up" && e.command.name != "Down")) {
             if (!editor.completer) {
                 editor.completer = new Autocomplete();
