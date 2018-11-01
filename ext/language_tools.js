@@ -1403,11 +1403,11 @@ ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/e
                 this.detach();
             }
         };
-        /*
+        
         this.mousedownListener = function(e) {
-            this.detach();
+            //this.detach();
         };
-        */
+        
         this.mousewheelListener = function(e) {
             this.detach();
         };
