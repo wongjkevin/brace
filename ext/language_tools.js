@@ -1904,8 +1904,6 @@ ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/e
     };
     
     var doLiveAutocomplete = function(e) {
-        console.log("doLiveAutocomplete")
-        console.log(e)
         var editor = e.editor;
         if (!e.command || (e.command.name != "Up" && e.command.name != "Down")) {
             if (!editor.completer) {
