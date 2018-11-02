@@ -1456,7 +1456,7 @@ ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/e
                     if (curTokenValue == " " || curTokenValue == "." || curTokenValue < 'A') {
                         wordRange.start.column = wordRange.start.column + 1;
                     }
-                    else if (curTokenValue == "\"\"") {
+                    else if (curTokenValue.startswith("\"") && curTokenValue.endswith("\"")) {
                         wordRange.start.column = wordRange.start.column + 1;
                         wordRange.column.end = wordRange.column.end -1;
                     }
