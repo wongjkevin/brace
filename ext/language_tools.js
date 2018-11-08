@@ -1439,7 +1439,6 @@ ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/e
                 var position = this.editor.selection.getCursor();
                 var token = this.editor.session.getTokenAt(position.row, position.column);
                 var tokenValue = token.value;
-                console.log("token value : \"" + token.value + "\"")
                 if(tokenValue !== " ") {
                     if(tokenValue.startsWith(" ")) { // Operator
                         tokenValue = token.value.trim();
