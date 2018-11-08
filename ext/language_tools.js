@@ -1280,7 +1280,7 @@ ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/e
     
     });
     
-    ace.define("ace/autocomplete",["require","exports","module","ace/keyboard/hash_handler","ace/autocomplete/popup","ace/autocomplete/util","ace/lib/event","ace/lib/lang","ace/lib/dom","ace/snippets"], function(acequire, exports, module) {
+    ace.define("ace/autocomplete",["require","exports","module","ace/range","ace/keyboard/hash_handler","ace/autocomplete/popup","ace/autocomplete/util","ace/lib/event","ace/lib/lang","ace/lib/dom","ace/snippets"], function(acequire, exports, module) {
     "use strict";
     
     var HashHandler = acequire("./keyboard/hash_handler").HashHandler;
@@ -1290,6 +1290,7 @@ ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/e
     var lang = acequire("./lib/lang");
     var dom = acequire("./lib/dom");
     var snippetManager = acequire("./snippets").snippetManager;
+    var Range = acequire("./range").Range;
     
     var Autocomplete = function() {
         this.autoInsert = false;
@@ -1435,28 +1436,30 @@ ace.define("ace/snippets",["require","exports","module","ace/lib/oop","ace/lib/e
             if (data.completer && data.completer.insertMatch) {
                 data.completer.insertMatch(this.editor, data);
             } else {
-                if (this.completions.filterText) {
-                    /*
-                    var ranges = this.editor.selection.getAllRanges();
-                    console.log(ranges)
-                    for (var i = 0, range; range = ranges[i]; i++) {
-                        range.start.column -= this.completions.filterText.length;
-                        console.log(range)
-                        this.editor.session.remove(range);
+                var position = this.editor.selection.getCursor();
+                var token = this.editor.session.getTokenAt(position.row, position.column);
+                var tokenValue = token.value;
+                console.log("token value : \"" + token.value + "\"")
+                if(tokenValue !== " ") {
+                    if(tokenValue.startsWith(" ")) { // Operator
+                        tokenValue = token.value.trim();
+                        token.start = token.start + 1;
                     }
-                    */
-                   // replace entire token with the selection
+                    if(tokenValue.includes(".")) {
+                        var wordRange = this.editor.selection.getWordRange(position.row, position.column);
+                        this.editor.session.remove(wordRange);
+                    } else {
+                        var tokenRange = new Range(position.row, token.start, position.row, token.start + tokenValue.length);
+                        if(tokenValue.startsWith("\"")) {
+                            tokenRange.setStart(position.row, token.start + 1);
+                            tokenRange.setEnd(position.row, token.start + tokenValue.length - 1);
+                        }
+                        this.editor.session.remove(tokenRange);
+                    }
                 }
                 if (data.snippet)
                     snippetManager.insertSnippet(this.editor, data.snippet);
                 else {
-                    var position = this.editor.selection.getCursor();
-                    var wordRange = this.editor.selection.getWordRange(position.row, position.column);
-                    var curTokenValue = this.editor.session.getTokenAt(position.row, position.column).value;
-                    if (curTokenValue == " " || curTokenValue == "." || curTokenValue < 'A') {
-                        wordRange.start.column = wordRange.start.column + 1;
-                    }
-                    this.editor.session.remove(wordRange);
                     this.editor.execCommand("insertstring", data.value || data);
                 }
             }
